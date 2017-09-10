@@ -25,8 +25,9 @@ struct API {
         }
     }
     
-    static func repoIssues(owner: String, repo: String, completionHandler: @escaping (DataResponse<[Model.Issue]>) -> Void) {
-        Alamofire.request(Router.repoIssues(owner: owner, repo: repo)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+    static func repoIssues(owner: String, repo: String, page: Int, completionHandler: @escaping (DataResponse<[Model.Issue]>) -> Void) {
+        let parameters: Parameters = ["page": page]
+        Alamofire.request(Router.repoIssues(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
             let result = dataResponse.map({ (json: JSON) -> [Model.Issue] in
                 return json.arrayValue.map{
                     Model.Issue(json: $0)

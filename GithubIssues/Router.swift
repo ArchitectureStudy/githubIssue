@@ -12,7 +12,7 @@ import SwiftyJSON
 
 enum Router {
     case authKey(Parameters, HTTPHeaders)
-    case repoIssues(owner: String, repo: String)
+    case repoIssues(owner: String, repo: String, parameters: Parameters)
     
 }
 
@@ -35,7 +35,7 @@ extension Router: URLRequestConvertible {
         switch self {
         case .authKey:
             return "/authorizations/clients/\(Router.clientID)/\(Date().timeIntervalSince1970)"
-        case let .repoIssues(owner, repo):
+        case let .repoIssues(owner, repo, _):
             return "/repos/\(owner)/\(repo)/issues"
         }
     }
@@ -45,7 +45,7 @@ extension Router: URLRequestConvertible {
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
-        if let token = UserDefaults.standard.string(forKey: "token") {
+        if let token = GlobalState.instance.token, !token.isEmpty {
             urlRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
         }
 
@@ -53,9 +53,8 @@ extension Router: URLRequestConvertible {
         case let .authKey(parameters, headers):
             headers.forEach{ (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-//            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-        case let .repoIssues(_, _):
-            urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
+        case let .repoIssues(_, _, parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest
