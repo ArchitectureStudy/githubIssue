@@ -13,6 +13,12 @@ import SwiftyJSON
 enum Router {
     case authKey(Parameters, HTTPHeaders)
     case repoIssues(owner: String, repo: String, parameters: Parameters)
+    case issueDetail(owner: String, repo: String, number: Int, parameters: Parameters)
+    case createComment(owner: String, repo: String, number: Int, parameters: Parameters)
+    case createIssue(owner: String, repo: String, parameters: Parameters)
+    case editIssue(owner: String, repo: String, number: Int, parameters: Parameters)
+    
+//    PATCH /repos/:owner/:repo/issues/:number
     
 }
 
@@ -26,8 +32,17 @@ extension Router: URLRequestConvertible {
         switch self {
         case .authKey:
             return .put
-        case .repoIssues:
+        case .repoIssues,
+             .issueDetail
+            :
             return .get
+        case .createComment,
+             .createIssue
+            :
+            return .post
+        case .editIssue
+            :
+            return .patch
         }
     }
     
@@ -37,6 +52,14 @@ extension Router: URLRequestConvertible {
             return "/authorizations/clients/\(Router.clientID)/\(Date().timeIntervalSince1970)"
         case let .repoIssues(owner, repo, _):
             return "/repos/\(owner)/\(repo)/issues"
+        case let .issueDetail(owner, repo, number, _):
+            return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
+        case let .createComment(owner, repo, number, _):
+            return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
+        case let .createIssue(owner, repo, _):
+            return "/repos/\(owner)/\(repo)/issues"
+        case let .editIssue(owner, repo, number, _):
+            return "/repos/\(owner)/\(repo)/issues/\(number)"
         }
     }
     
@@ -55,6 +78,14 @@ extension Router: URLRequestConvertible {
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case let .repoIssues(_, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case let .issueDetail(_, _, _, parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case let .createComment(_, _, _, parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case let .createIssue(_, _, parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case let .editIssue(_, _, _, parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest

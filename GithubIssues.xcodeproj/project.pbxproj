@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C9911DA0C2D7555BCE11A163 /* Pods_GithubIssues.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C82EDEECF19666BE564C8 /* Pods_GithubIssues.framework */; };
+		D7014DC61F6814A000F0F7F7 /* IssueDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */; };
+		D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */; };
+		D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D730D9951F6AE4DA0057276B /* ExampleViewController.swift */; };
 		D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE58DD1F64118400380CEE /* AppDelegate.swift */; };
 		D7CE58E31F64118400380CEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E11F64118400380CEE /* Main.storyboard */; };
 		D7CE58E51F64118400380CEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E41F64118400380CEE /* Assets.xcassets */; };
@@ -26,6 +29,12 @@
 		D7CE59241F65005D00380CEE /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59231F65005D00380CEE /* RepoViewController.swift */; };
 		D7CE59261F65077B00380CEE /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59251F65077B00380CEE /* IssueCell.swift */; };
 		D7CE59281F65209A00380CEE /* LayoutAttributable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59271F65209A00380CEE /* LayoutAttributable.swift */; };
+		D7CE592A1F6546D200380CEE /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59291F6546D200380CEE /* IssueDetailViewController.swift */; };
+		D7CE592C1F655AF600380CEE /* IssueCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE592B1F655AF600380CEE /* IssueCommentCell.swift */; };
+		D7CE592E1F655C1C00380CEE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE592D1F655C1C00380CEE /* Comment.swift */; };
+		D7CE59301F658CA900380CEE /* IssueCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7CE592F1F658CA900380CEE /* IssueCommentCell.xib */; };
+		D7ED99D41F6D71ED00E4B903 /* CreateIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */; };
+		D7ED99D61F6E100F00E4B903 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */; };
 		DC2DDE695A94509B0524CD3F /* Pods_GithubIssuesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C987F46EEBF6AB7C71701BE6 /* Pods_GithubIssuesUITests.framework */; };
 		F3AD9071E2E92DE33C2D8987 /* Pods_GithubIssuesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0D2DC2642FE096CC2AE419 /* Pods_GithubIssuesTests.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +66,9 @@
 		AE8C82EDEECF19666BE564C8 /* Pods_GithubIssues.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubIssues.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F6DF003FFB6DA72643444B /* Pods-GithubIssuesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubIssuesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GithubIssuesUITests/Pods-GithubIssuesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C987F46EEBF6AB7C71701BE6 /* Pods_GithubIssuesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubIssuesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderView.swift; sourceTree = "<group>"; };
+		D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		D730D9951F6AE4DA0057276B /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		D7CE58DA1F64118400380CEE /* GithubIssues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubIssues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CE58DD1F64118400380CEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7CE58E21F64118400380CEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +93,12 @@
 		D7CE59231F65005D00380CEE /* RepoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		D7CE59251F65077B00380CEE /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		D7CE59271F65209A00380CEE /* LayoutAttributable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAttributable.swift; sourceTree = "<group>"; };
+		D7CE59291F6546D200380CEE /* IssueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
+		D7CE592B1F655AF600380CEE /* IssueCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCommentCell.swift; sourceTree = "<group>"; };
+		D7CE592D1F655C1C00380CEE /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D7CE592F1F658CA900380CEE /* IssueCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCommentCell.xib; sourceTree = "<group>"; };
+		D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIssueViewController.swift; sourceTree = "<group>"; };
+		D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +185,7 @@
 				D7CE58E41F64118400380CEE /* Assets.xcassets */,
 				D7CE58E61F64118400380CEE /* LaunchScreen.storyboard */,
 				D7CE58E91F64118400380CEE /* Info.plist */,
+				D730D9951F6AE4DA0057276B /* ExampleViewController.swift */,
 			);
 			path = GithubIssues;
 			sourceTree = "<group>";
@@ -204,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CE590F1F64CB6F00380CEE /* DataRequest+extension.swift */,
+				D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -223,6 +243,7 @@
 				D7CE59141F64CC0B00380CEE /* Model.swift */,
 				D7CE59171F64CC6B00380CEE /* Issue.swift */,
 				D7CE59191F64CFD500380CEE /* User.swift */,
+				D7CE592D1F655C1C00380CEE /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -234,6 +255,12 @@
 				D7CE591E1F64D99300380CEE /* LoginViewController.swift */,
 				D7CE59231F65005D00380CEE /* RepoViewController.swift */,
 				D7CE59251F65077B00380CEE /* IssueCell.swift */,
+				D7CE59291F6546D200380CEE /* IssueDetailViewController.swift */,
+				D7CE592B1F655AF600380CEE /* IssueCommentCell.swift */,
+				D7CE592F1F658CA900380CEE /* IssueCommentCell.xib */,
+				D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */,
+				D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */,
+				D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -358,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CE58E81F64118400380CEE /* LaunchScreen.storyboard in Resources */,
+				D7CE59301F658CA900380CEE /* IssueCommentCell.xib in Resources */,
 				D7CE58E51F64118400380CEE /* Assets.xcassets in Resources */,
 				D7CE58E31F64118400380CEE /* Main.storyboard in Resources */,
 			);
@@ -522,9 +550,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7014DC61F6814A000F0F7F7 /* IssueDetailHeaderView.swift in Sources */,
 				D7CE59181F64CC6B00380CEE /* Issue.swift in Sources */,
 				D7CE59281F65209A00380CEE /* LayoutAttributable.swift in Sources */,
+				D7ED99D61F6E100F00E4B903 /* ReposViewController.swift in Sources */,
+				D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */,
 				D7CE59101F64CB6F00380CEE /* DataRequest+extension.swift in Sources */,
+				D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */,
+				D7CE592A1F6546D200380CEE /* IssueDetailViewController.swift in Sources */,
 				D7CE591D1F64D82E00380CEE /* IssuesViewController.swift in Sources */,
 				D7CE590C1F64127C00380CEE /* Router.swift in Sources */,
 				D7CE591A1F64CFD500380CEE /* User.swift in Sources */,
@@ -532,8 +565,11 @@
 				D7CE59211F64DBB800380CEE /* GlobalState.swift in Sources */,
 				D7CE59241F65005D00380CEE /* RepoViewController.swift in Sources */,
 				D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */,
+				D7CE592E1F655C1C00380CEE /* Comment.swift in Sources */,
 				D7CE59261F65077B00380CEE /* IssueCell.swift in Sources */,
+				D7CE592C1F655AF600380CEE /* IssueCommentCell.swift in Sources */,
 				D7CE591F1F64D99300380CEE /* LoginViewController.swift in Sources */,
+				D7ED99D41F6D71ED00E4B903 /* CreateIssueViewController.swift in Sources */,
 				D7CE59131F64CBD800380CEE /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

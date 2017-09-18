@@ -17,7 +17,10 @@ class IssueCell: UICollectionViewCell, LayoutEstimatable {
     @IBOutlet var commentCountButton: UIButton!
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        return self.estimateLayoutAttributes(layoutAttributes)
+        let layoutAttributes = self.estimateLayoutAttributes(layoutAttributes)
+        
+        print("preferredLayoutAttributesFitting:\(layoutAttributes.bounds.size), item: \(layoutAttributes.indexPath.item)")
+        return layoutAttributes
     }
 }
 
@@ -29,7 +32,7 @@ extension IssueCell {
         let createdAt = issue.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
         contentLabel.text = "#\(issue.number) \(issue.state.display) on \(createdAt) by \(issue.user.login)"
         commentCountButton.setTitle("\(issue.comments)", for: .normal)
-        stateButton.isSelected = issue.state == .close
+        stateButton.isSelected = issue.state == .closed
     }
 }
 

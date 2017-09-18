@@ -13,9 +13,10 @@ final class GlobalState {
     
     
     struct constants {
-        static let tokenKey       = "token"
-        static let ownerKey      = "owner"
-        static let repoKey        = "repo"
+        static let tokenKey         = "token"
+        static let ownerKey         = "owner"
+        static let repoKey          = "repo"
+        static let reposKey         = "repos"
     }
     
     var token: String? {
@@ -54,6 +55,26 @@ final class GlobalState {
         get {
             let isEmpty = token?.isEmpty ?? true
             return !isEmpty
+        }
+    }
+    
+    func addRepo(owner:String, repo: String) {
+        let dict = ["owner": owner, "repo" : repo]
+        var repos: [[String: String]] = (UserDefaults.standard.array(forKey: constants.reposKey) as? [[String : String]]) ?? []
+        repos.append(dict)
+        
+        UserDefaults.standard.set(NSSet(array: repos).allObjects, forKey: constants.reposKey)
+    }
+    
+    var repos: [(owner: String, repo:String)] {
+        get {
+            let repoDicts: [[String: String]] = (UserDefaults.standard.array(forKey: constants.reposKey) as? [[String : String]]) ?? []
+            let repos = repoDicts.map { (repoDict: [String: String]) -> (String, String) in
+                let owner = repoDict["owner"] ?? ""
+                let repo = repoDict["repo"] ?? ""
+                return (owner, repo)
+            }
+            return repos
         }
     }
 }

@@ -23,6 +23,7 @@ extension Model {
         let closedAt: Date?
         
         public init(json: JSON) {
+            print("issue json: \(json)")
             id = json["id"].intValue
             number = json["number"].intValue
             title = json["title"].stringValue
@@ -41,16 +42,50 @@ extension Model {
 }
 
 extension Model.Issue {
+    var toDict: [String: Any] {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        
+        
+        var dict = ["id": id,
+         "number": number,
+         "title": title,
+         "comments": comments,
+         "body": body,
+         "state": state.display,
+         "user": ["id": user.id, "login": user.login, "acatar_url": (user.avatarURL?.absoluteString ?? "")]
+         ] as [String : Any]
+        if let createdAt = createdAt {
+            dict["createdAt"] = format.string(from: createdAt)
+        }
+        if let updatedAt = updatedAt {
+            dict["updatedAt"] = format.string(from: updatedAt)
+        }
+        if let closedAt = closedAt {
+            dict["closedAt"] = format.string(from: closedAt)
+        }
+        
+        print("dict: \(dict)")
+        return dict
+        
+    }
+}
+
+extension Model.Issue {
     enum State: String {
-        case open = "open", close = "close", none = "none"
+        case open = "open"
+        case closed = "closed"
+        case none = "none"
         
         var display: String {
             switch self {
             case .open: return "opened"
-            case .close: return "closed"
+            case .closed: return "closed"
             default: return "-"
             }
         }
+        
+        
     }
 }
 
