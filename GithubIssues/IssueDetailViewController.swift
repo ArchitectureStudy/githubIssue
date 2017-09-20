@@ -10,7 +10,8 @@ import UIKit
 import Alamofire
 
 protocol DatasourceRefreshable: class {
-    var datasource: [Model.Comment] { get set }
+    associatedtype Item
+    var datasource: [Item] { get set }
     var needRefreshDatasource: Bool { get set }
 }
 

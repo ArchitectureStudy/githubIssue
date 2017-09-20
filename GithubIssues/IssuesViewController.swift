@@ -9,6 +9,33 @@
 import UIKit
 import Alamofire
 
+class LoadMoreView: UIView {
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var doneView: UIView!
+    
+}
+
+extension LoadMoreView {
+    func loadDone() {
+        activityIndicatorView.isHidden = true
+        doneView.isHidden = false
+    }
+    
+    func load() {
+        activityIndicatorView.isHidden = false
+        doneView.isHidden = true
+    }
+}
+
+
+protocol Feed: class {
+    var collectionView: UICollectionView! { get set }
+    var datasource: [Model.Issue] { get set }
+    var refreshControl: UIRefreshControl { get set }
+    var canLoadMore: Bool { get set }
+    
+}
+
 class IssuesViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     var owner: String = ""
@@ -19,7 +46,9 @@ class IssuesViewController: UIViewController {
     fileprivate var canLoadMore: Bool = true
     fileprivate var needRefreshDatasource: Bool = false
     fileprivate var isLoading: Bool = false
-
+    fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
+    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
+    @IBOutlet fileprivate var loadMoreView: LoadMoreView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -30,13 +59,23 @@ extension IssuesViewController {
     func setup() {
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
+        collectionView.register(UINib(nibName: "IssueCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            print("estimatedItemSize")
-            print("size : \(CGSize(width: UIScreen.main.bounds.width, height: 56))")
-            flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: 56)
-        }
         load()
+        footer()
+        loadMoreView.load()
+    }
+    
+    func layoutFooter() {
+        loadMoreView.frame.origin.y = collectionView.contentSize.height
+        loadMoreView.frame.size.width = collectionView.frame.width
+        loadMoreView.frame.size.height = 50
+    }
+    func footer() {
+        collectionView.addSubview(loadMoreView)
+        var inset = collectionView.contentInset
+        inset.bottom = 50
+        collectionView.contentInset = inset
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -101,23 +140,28 @@ extension IssuesViewController {
         page = page + 1
         if issues.count == 0 {
             canLoadMore = false
+            loadMoreView.loadDone()
+            
         }
         refreshControl.endRefreshing()
         
-        print("datasource.count,1:\(datasource.count)")
         datasource.append(contentsOf: issues)
-        print("datasource.count,2:\(datasource.count)")
-        DispatchQueue.main.async { [weak self] in
-        self?.collectionView.reloadData()
-        }
         
-//        collectionView.reloadSections(IndexSet(integer: 0))
+        print("collectionView.frame1: \(collectionView.contentSize)")
+        collectionView.reloadData()
+        print("collectionView.frame2: \(collectionView.contentSize)")
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.layoutFooter()
+        }
+        print("collectionView.frame3: \(collectionView.contentSize)")
         
     }
     
     func refresh() {
         page = 0
         canLoadMore = true
+        loadMoreView.load()
         setNeedRefreshDatasource()
         load()
     }
@@ -131,13 +175,12 @@ extension IssuesViewController {
 
 extension IssuesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("item: \(indexPath.item), count: \(datasource.count)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath) as! IssueCell
         let issue = datasource[indexPath.item]
         cell.update(issue: issue)
         return cell
     }
-
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -151,7 +194,6 @@ extension IssuesViewController: UICollectionViewDataSource {
 
 extension IssuesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        print("item: \(indexPath.item), count: \(datasource.count)")
         if indexPath.item == datasource.count - 1  && !isLoading{
             loadMore()
         }
@@ -160,8 +202,20 @@ extension IssuesViewController: UICollectionViewDelegate {
 
 extension IssuesViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         
-        return CGSize(width: collectionView.frame.size.width, height: 100)
+        var estimatedSize = estimatedSizes[indexPath] ?? CGSize.zero
+        if estimatedSize != .zero {
+            return estimatedSize
+        }
+        let data = datasource[indexPath.item]
+        
+        estimateCell.update(issue: data)
+        
+        let targetSize =  CGSize(width: collectionView.frame.size.width, height: 50)
+        
+        estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
+        estimatedSizes[indexPath] = estimatedSize
+        
+        return estimatedSize
     }
 }

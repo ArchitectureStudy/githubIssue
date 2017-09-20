@@ -11,6 +11,7 @@
 		D7014DC61F6814A000F0F7F7 /* IssueDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */; };
 		D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */; };
 		D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D730D9951F6AE4DA0057276B /* ExampleViewController.swift */; };
+		D7412BD31F701F4A00E63DF6 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7412BD21F701F4A00E63DF6 /* IssueCell.xib */; };
 		D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE58DD1F64118400380CEE /* AppDelegate.swift */; };
 		D7CE58E31F64118400380CEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E11F64118400380CEE /* Main.storyboard */; };
 		D7CE58E51F64118400380CEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E41F64118400380CEE /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderView.swift; sourceTree = "<group>"; };
 		D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		D730D9951F6AE4DA0057276B /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+		D7412BD21F701F4A00E63DF6 /* IssueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		D7CE58DA1F64118400380CEE /* GithubIssues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubIssues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CE58DD1F64118400380CEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7CE58E21F64118400380CEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderView.swift */,
 				D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */,
 				D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */,
+				D7412BD21F701F4A00E63DF6 /* IssueCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CE58E81F64118400380CEE /* LaunchScreen.storyboard in Resources */,
+				D7412BD31F701F4A00E63DF6 /* IssueCell.xib in Resources */,
 				D7CE59301F658CA900380CEE /* IssueCommentCell.xib in Resources */,
 				D7CE58E51F64118400380CEE /* Assets.xcassets in Resources */,
 				D7CE58E31F64118400380CEE /* Main.storyboard in Resources */,

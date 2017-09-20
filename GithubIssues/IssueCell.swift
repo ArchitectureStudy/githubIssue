@@ -8,22 +8,21 @@
 
 import UIKit
 
-class IssueCell: UICollectionViewCell, LayoutEstimatable {
-    static var estimatedLayout: [IndexPath: CGSize] = [:]
-    
+class IssueCell: UICollectionViewCell {
+
     @IBOutlet var stateButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var commentCountButton: UIButton!
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let layoutAttributes = self.estimateLayoutAttributes(layoutAttributes)
-        
-        print("preferredLayoutAttributesFitting:\(layoutAttributes.bounds.size), item: \(layoutAttributes.indexPath.item)")
-        return layoutAttributes
-    }
 }
 
+extension IssueCell {
+    static var cellFromNib: IssueCell {
+        get {
+            return Bundle.main.loadNibNamed("IssueCell", owner: nil, options: nil)?.first as! IssueCell
+        }
+    }
+}
 
 extension IssueCell {
     func update(issue: Model.Issue) {
