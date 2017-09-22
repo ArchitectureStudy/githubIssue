@@ -9,24 +9,6 @@
 import UIKit
 import Alamofire
 
-protocol DatasourceRefreshable: class {
-    associatedtype Item
-    var datasource: [Item] { get set }
-    var needRefreshDatasource: Bool { get set }
-}
-
-extension DatasourceRefreshable {
-    func setNeedRefreshDatasource() {
-        needRefreshDatasource = true
-    }
-    
-    func refreshDataSourceIfNeeded() {
-        if needRefreshDatasource {
-            datasource = []
-            needRefreshDatasource = false
-        }
-    }
-}
 
 class IssueDetailViewController: UIViewController, DatasourceRefreshable {
     
@@ -128,7 +110,7 @@ extension IssueDetailViewController {
         if let issue = issue {
             headerView.update(data: issue)
             collectionView.addSubview(headerView)
-            var targetSize  = CGSize(width: collectionView.frame.width, height: 0)
+            let targetSize  = CGSize(width: collectionView.frame.width, height: 0)
             
             let size = headerView.systemLayoutSizeFitting(
                 targetSize,
@@ -210,7 +192,7 @@ extension IssueDetailViewController {
         collectionView.reloadData()
     }
     
-    func refresh() {
+    @objc func refresh() {
         page = 1
         canLoadMore = true
         setNeedRefreshDatasource()

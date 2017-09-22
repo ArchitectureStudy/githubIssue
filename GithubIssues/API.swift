@@ -37,6 +37,24 @@ struct API {
         }
     }
     
+    typealias IssueResponsesHandler = (DataResponse<[Model.Issue]>) -> Void
+    static func repoIssues(owner: String, repo: String) -> (Int, @escaping IssueResponsesHandler) -> Void {
+        
+        return { (page: Int, handler: @escaping IssueResponsesHandler) in
+            let parameters: Parameters = ["page": page, "state": "all"]
+            Alamofire.request(Router.repoIssues(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+                let result = dataResponse.map({ (json: JSON) -> [Model.Issue] in
+                    return json.arrayValue.map{
+                        Model.Issue(json: $0)
+                    }
+                })
+                handler(result)
+            }
+        } 
+    }
+    
+    
+    
     static func issueDetail(owner: String, repo: String, number: Int, page: Int, completionHandler: @escaping (DataResponse<[Model.Comment]>) -> Void) {
         let parameters: Parameters = ["page": page]
         Alamofire.request(Router.issueDetail(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in

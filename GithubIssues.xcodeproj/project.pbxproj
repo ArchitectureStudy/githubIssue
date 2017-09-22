@@ -12,6 +12,8 @@
 		D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */; };
 		D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D730D9951F6AE4DA0057276B /* ExampleViewController.swift */; };
 		D7412BD31F701F4A00E63DF6 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7412BD21F701F4A00E63DF6 /* IssueCell.xib */; };
+		D7CB7A351F74A3C700816E33 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CB7A341F74A3C700816E33 /* ListViewController.swift */; };
+		D7CB7A371F74A41900816E33 /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CB7A361F74A41900816E33 /* LoadMoreView.swift */; };
 		D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE58DD1F64118400380CEE /* AppDelegate.swift */; };
 		D7CE58E31F64118400380CEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E11F64118400380CEE /* Main.storyboard */; };
 		D7CE58E51F64118400380CEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E41F64118400380CEE /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		D730D9951F6AE4DA0057276B /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		D7412BD21F701F4A00E63DF6 /* IssueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
+		D7CB7A341F74A3C700816E33 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		D7CB7A361F74A41900816E33 /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		D7CE58DA1F64118400380CEE /* GithubIssues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubIssues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CE58DD1F64118400380CEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7CE58E21F64118400380CEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 		D7CE591B1F64D80F00380CEE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D7CB7A341F74A3C700816E33 /* ListViewController.swift */,
 				D7CE591C1F64D82E00380CEE /* IssuesViewController.swift */,
 				D7CE591E1F64D99300380CEE /* LoginViewController.swift */,
 				D7CE59231F65005D00380CEE /* RepoViewController.swift */,
@@ -264,6 +269,7 @@
 				D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */,
 				D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */,
 				D7412BD21F701F4A00E63DF6 /* IssueCell.xib */,
+				D7CB7A361F74A41900816E33 /* LoadMoreView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -570,8 +576,10 @@
 				D7CE59241F65005D00380CEE /* RepoViewController.swift in Sources */,
 				D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */,
 				D7CE592E1F655C1C00380CEE /* Comment.swift in Sources */,
+				D7CB7A351F74A3C700816E33 /* ListViewController.swift in Sources */,
 				D7CE59261F65077B00380CEE /* IssueCell.swift in Sources */,
 				D7CE592C1F655AF600380CEE /* IssueCommentCell.swift in Sources */,
+				D7CB7A371F74A41900816E33 /* LoadMoreView.swift in Sources */,
 				D7CE591F1F64D99300380CEE /* LoginViewController.swift in Sources */,
 				D7ED99D41F6D71ED00E4B903 /* CreateIssueViewController.swift in Sources */,
 				D7CE59131F64CBD800380CEE /* API.swift in Sources */,
@@ -734,6 +742,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.GithubIssues;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -748,6 +757,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.GithubIssues;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

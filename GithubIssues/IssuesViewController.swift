@@ -9,73 +9,20 @@
 import UIKit
 import Alamofire
 
-class LoadMoreView: UIView {
-    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet var doneView: UIView!
+final class IssuesViewController: ListViewController<Model.Issue>, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
     
-}
-
-extension LoadMoreView {
-    func loadDone() {
-        activityIndicatorView.isHidden = true
-        doneView.isHidden = false
-    }
-    
-    func load() {
-        activityIndicatorView.isHidden = false
-        doneView.isHidden = true
-    }
-}
-
-
-protocol Feed: class {
-    var collectionView: UICollectionView! { get set }
-    var datasource: [Model.Issue] { get set }
-    var refreshControl: UIRefreshControl { get set }
-    var canLoadMore: Bool { get set }
-    
-}
-
-class IssuesViewController: UIViewController {
-    @IBOutlet var collectionView: UICollectionView!
     var owner: String = ""
     var repo: String = ""
-    fileprivate var datasource: [Model.Issue] = []
-    fileprivate let refreshControl = UIRefreshControl()
-    fileprivate var page: Int = 0
-    fileprivate var canLoadMore: Bool = true
-    fileprivate var needRefreshDatasource: Bool = false
-    fileprivate var isLoading: Bool = false
+
+ 
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
     fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
-    @IBOutlet fileprivate var loadMoreView: LoadMoreView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-    }
-}
+        api = API.repoIssues(owner: owner, repo: repo)// as? ((Int, @escaping (DataResponse<[Model.Issue]>) -> Void) -> Void)
 
-extension IssuesViewController {
-    func setup() {
-        collectionView.addSubview(refreshControl)
-        collectionView.alwaysBounceVertical = true
-        collectionView.register(UINib(nibName: "IssueCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        load()
-        footer()
-        loadMoreView.load()
-    }
-    
-    func layoutFooter() {
-        loadMoreView.frame.origin.y = collectionView.contentSize.height
-        loadMoreView.frame.size.width = collectionView.frame.width
-        loadMoreView.frame.size.height = 50
-    }
-    func footer() {
-        collectionView.addSubview(loadMoreView)
-        var inset = collectionView.contentInset
-        inset.bottom = 50
-        collectionView.contentInset = inset
+        setup()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,80 +47,8 @@ extension IssuesViewController {
             }
             
         }
-        
-    }
-}
-
-extension IssuesViewController {
-    func setNeedRefreshDatasource() {
-        needRefreshDatasource = true
     }
     
-    func refreshDataSourceIfNeeded() {
-        if needRefreshDatasource {
-            self.datasource = []
-            collectionView.reloadData()
-            needRefreshDatasource = false
-        }
-    }
-}
-
-extension IssuesViewController {
-    func load() {
-        isLoading = true
-        API.repoIssues(owner: owner, repo: repo, page: page + 1) {[weak self] (response: DataResponse<[Model.Issue]>) in
-            guard let `self` = self else { return }
-            switch response.result {
-            case .success(let issues):
-                self.dataLoaded(issues: issues)
-                self.isLoading = false
-            case .failure(_):
-                self.isLoading = false
-                break
-            }
-        }
-    }
-    
-    func dataLoaded(issues: [Model.Issue]) {
-        refreshDataSourceIfNeeded()
-        
-        page = page + 1
-        if issues.count == 0 {
-            canLoadMore = false
-            loadMoreView.loadDone()
-            
-        }
-        refreshControl.endRefreshing()
-        
-        datasource.append(contentsOf: issues)
-        
-        print("collectionView.frame1: \(collectionView.contentSize)")
-        collectionView.reloadData()
-        print("collectionView.frame2: \(collectionView.contentSize)")
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.layoutFooter()
-        }
-        print("collectionView.frame3: \(collectionView.contentSize)")
-        
-    }
-    
-    func refresh() {
-        page = 0
-        canLoadMore = true
-        loadMoreView.load()
-        setNeedRefreshDatasource()
-        load()
-    }
-    
-    func loadMore() {
-        if canLoadMore {
-            load()
-        }
-    }
-}
-
-extension IssuesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath) as! IssueCell
         let issue = datasource[indexPath.item]
@@ -189,18 +64,12 @@ extension IssuesViewController: UICollectionViewDataSource {
         return datasource.count
     }
     
-    
-}
-
-extension IssuesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.item == datasource.count - 1  && !isLoading{
-            loadMore()
-        }
+        
+        loadMore(indexPath: indexPath)
+        
     }
-}
-
-extension IssuesViewController: UICollectionViewDelegateFlowLayout {
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var estimatedSize = estimatedSizes[indexPath] ?? CGSize.zero
