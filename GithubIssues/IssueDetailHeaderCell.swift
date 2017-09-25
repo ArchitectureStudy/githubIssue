@@ -8,7 +8,9 @@
 
 import UIKit
 
-class IssueDetailHeaderView: UIView {
+@IBDesignable
+class IssueDetailHeaderCell: UICollectionReusableView {
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var stateButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
@@ -18,17 +20,45 @@ class IssueDetailHeaderView: UIView {
     @IBOutlet weak var commentInfoLabel: UILabel!
     @IBOutlet weak var commentBodyLabel: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
         print("awakeFromNib")
     }
+    
+    public func loadNib() -> UIView {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: "IssueDetailHeaderCell", bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil)[0] as! UIView // swiftlint:disable:this force_cast
+    }
+    
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupNib()
+    }
+    
+    // MARK: - NSCoding
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupNib()
+    }
+    
+    fileprivate func setupNib() {
+        let view = self.loadNib()
+        
+        self.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let bindings = ["view": view]
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:[], metrics:nil, views: bindings))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:[], metrics:nil, views: bindings))
+    }
+    
+    static let estimateSizeCell: IssueDetailHeaderCell = IssueDetailHeaderCell()
 }
 
 
 // MARK: - setup
-extension IssueDetailHeaderView {
+extension IssueDetailHeaderCell {
     func setup() {
         stateButton.clipsToBounds = true
         stateButton.layer.cornerRadius = 2
@@ -47,11 +77,25 @@ extension IssueDetailHeaderView {
         commentContainerView.layer.borderWidth = 1
         
     }
-    
-    
+    static func headerSize(issue: Model.Issue, width: CGFloat) -> CGSize {
+        
+        IssueDetailHeaderCell.estimateSizeCell.update(data: issue)
+        let targetSize  = CGSize(width: width, height: 0)
+        let size = IssueDetailHeaderCell.estimateSizeCell.systemLayoutSizeFitting(
+            targetSize,
+            withHorizontalFittingPriority: UILayoutPriorityRequired,
+            verticalFittingPriority: UILayoutPriorityDefaultLow
+        )
+        
+        
+        let width = size.width == 0 ? IssueDetailHeaderCell.estimateSizeCell.bounds.width : size.width
+        let height = size.height == 0 ? IssueDetailHeaderCell.estimateSizeCell.bounds.height : size.height
+        let cellSize = CGSize(width: width, height: height)
+        return cellSize
+    }
 }
 
-extension IssueDetailHeaderView {
+extension IssueDetailHeaderCell {
     func update(data: Model.Issue, withImage: Bool = true) {
         
         let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"

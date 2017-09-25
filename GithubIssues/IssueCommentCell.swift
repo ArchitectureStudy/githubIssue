@@ -10,7 +10,9 @@ import UIKit
 import AlamofireImage
 
 
-class IssueCommentCell: UICollectionViewCell {
+final class IssueCommentCell: UICollectionViewCell, CellProtocol {
+    
+    
     @IBOutlet var bodyLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
@@ -25,14 +27,25 @@ class IssueCommentCell: UICollectionViewCell {
 }
 
 extension IssueCommentCell {
+    func update(data: Model.Comment) {
+        update(data: data, withImage: true)
+    }
     
-    func update(data: Model.Comment, withImage: Bool = true) {
-        if let url = data.user.avatarURL, withImage {
+    typealias Item = Model.Comment
+    
+    func update(data comment: Model.Comment, withImage: Bool = true) {
+        if let url = comment.user.avatarURL {
             profileImageView.af_setImage(withURL: url)
         }
         
-        let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
-        titleLabel.text = "\(data.user.login) commented on \(createdAt)"
-        bodyLabel.text = data.body
+        let createdAt = comment.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
+        titleLabel.text = "\(comment.user.login) commented on \(createdAt)"
+        bodyLabel.text = comment.body
+    }
+
+    static var cellFromNib: IssueCommentCell {
+        get {
+            return Bundle.main.loadNibNamed("IssueCommentCell", owner: nil, options: nil)?.first as! IssueCommentCell
+        }
     }
 }

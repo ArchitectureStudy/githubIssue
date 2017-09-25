@@ -53,7 +53,21 @@ struct API {
         } 
     }
     
+    typealias CommentResponsesHandler = (DataResponse<[Model.Comment]>) -> Void
     
+    static func issueComment(owner: String, repo: String, number: Int) -> (Int, @escaping CommentResponsesHandler) -> Void {
+        return { page, handler in
+            let parameters: Parameters = ["page": page]
+            Alamofire.request(Router.issueDetail(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+                let result = dataResponse.map({ (json: JSON) -> [Model.Comment] in
+                    return json.arrayValue.map{
+                        Model.Comment(json: $0)
+                    }
+                })
+                handler(result)
+            }
+        }
+    }
     
     static func issueDetail(owner: String, repo: String, number: Int, page: Int, completionHandler: @escaping (DataResponse<[Model.Comment]>) -> Void) {
         let parameters: Parameters = ["page": page]

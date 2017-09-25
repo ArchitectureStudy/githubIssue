@@ -18,6 +18,8 @@ class RepoViewController: UIViewController {
 
         ownerTextField.text = GlobalState.instance.owner
         repoTextField.text = GlobalState.instance.repo
+        
+//        repoTextField.layer.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         // Do any additional setup after loading the view.
     }
 

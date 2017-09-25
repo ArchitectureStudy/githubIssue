@@ -9,27 +9,26 @@
 import UIKit
 import Alamofire
 
-final class IssuesViewController: ListViewController<Model.Issue>, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
-    
+final class IssuesViewController: ListViewController<IssueCell>  {
     var owner: String = ""
     var repo: String = ""
-
- 
-    fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
-    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api = API.repoIssues(owner: owner, repo: repo)// as? ((Int, @escaping (DataResponse<[Model.Issue]>) -> Void) -> Void)
-
+        api = API.repoIssues(owner: owner, repo: repo)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         setup()
+        
     }
     
+    override func setup() {
+        super.setup()
+        collectionView.register(UINib(nibName: "IssueCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
+        
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detailViewController = segue.destination as? IssueDetailViewController,
-            let cell = sender as? IssueCell,
-            let indexPath = collectionView.indexPath(for: cell) {
-            let issue = datasource[indexPath.item]
+        if let detailViewController = segue.destination as? IssueDetailViewController,let issue = sender as? Model.Issue {
             detailViewController.issue = issue
             detailViewController.repo = repo
             detailViewController.owner = owner
@@ -49,42 +48,31 @@ final class IssuesViewController: ListViewController<Model.Issue>, UICollectionV
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath) as! IssueCell
-        let issue = datasource[indexPath.item]
-        cell.update(issue: issue)
-        return cell
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        loadMore(indexPath: indexPath)
-        
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        var estimatedSize = estimatedSizes[indexPath] ?? CGSize.zero
-        if estimatedSize != .zero {
-            return estimatedSize
-        }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = datasource[indexPath.item]
-        
-        estimateCell.update(issue: data)
-        
-        let targetSize =  CGSize(width: collectionView.frame.size.width, height: 50)
-        
-        estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
-        estimatedSizes[indexPath] = estimatedSize
-        
-        return estimatedSize
+        self.performSegue(withIdentifier: "PushIssueDetail", sender: data)
+    }
+    
+    
+    override func cellIdentifier() -> String {
+        return "IssueCell"
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+            
+        case UICollectionElementKindSectionHeader:
+            assert(false, "Unexpected element kind")
+            
+        case UICollectionElementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadMoreCell", for: indexPath) as? LoadMoreCell ?? LoadMoreCell()
+            
+            loadMoreCell = footerView
+            return footerView
+            
+        default:
+            
+            assert(false, "Unexpected element kind")
+        }
     }
 }

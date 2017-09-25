@@ -8,7 +8,13 @@
 
 import UIKit
 
-class IssueCell: UICollectionViewCell {
+protocol CellProtocol {
+    associatedtype Item
+    func update(data: Item)
+    static var cellFromNib: Self { get }
+}
+
+final class IssueCell: UICollectionViewCell {
 
     @IBOutlet var stateButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
@@ -16,16 +22,16 @@ class IssueCell: UICollectionViewCell {
     @IBOutlet var commentCountButton: UIButton!
 }
 
-extension IssueCell {
+extension IssueCell: CellProtocol {
+    typealias Item = Model.Issue
+    
     static var cellFromNib: IssueCell {
         get {
             return Bundle.main.loadNibNamed("IssueCell", owner: nil, options: nil)?.first as! IssueCell
         }
     }
-}
 
-extension IssueCell {
-    func update(issue: Model.Issue) {
+    func update(data issue: Model.Issue) {
         titleLabel.text = issue.title
         contentLabel.text = issue.body
         let createdAt = issue.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"

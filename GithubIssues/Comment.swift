@@ -33,3 +33,9 @@ extension Model {
         
     }
 }
+
+extension Model.Comment {
+    func a() {
+    }
+}
+
