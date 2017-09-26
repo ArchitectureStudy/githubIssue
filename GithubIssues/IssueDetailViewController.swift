@@ -17,6 +17,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     var owner: String = ""
     var repo: String = ""
     var issue: Model.Issue!
+    var headerSize: CGSize = CGSize.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,11 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return IssueDetailHeaderCell.headerSize(issue: issue, width: collectionView.frame.width)
+        if headerSize == CGSize.zero {
+            headerSize = IssueDetailHeaderCell.headerSize(issue: issue, width: collectionView.frame.width)
+            
+        }
+        return headerSize
     }
 }
 
