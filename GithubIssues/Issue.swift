@@ -86,14 +86,11 @@ extension Model.Issue {
             case .none: return "-"
             }
         }
-        
-        
     }
 }
 
-
 extension Model.Issue: Equatable {
-    public static func ==(lhs: Model.Issue, rhs: Model.Issue) -> Bool {
+    public static func == (lhs: Model.Issue, rhs: Model.Issue) -> Bool {
         return lhs.id == rhs.id
     }
 }

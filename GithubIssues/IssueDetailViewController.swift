@@ -56,7 +56,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
                 self.commentTextField.resignFirstResponder()
                 
                 break
-            case .failure(_):
+            case .failure:
                 break
             }
         }
@@ -111,35 +111,23 @@ extension IssueDetailViewController {
             guard let animationDuration = notifiaction.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
             guard let animationCurve = notifiaction.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt else { return }
             let animationOptions = UIViewAnimationOptions(rawValue: animationCurve)
-            
             let keyboardHeight = keyboardBounds.height
-            
-            
             let inputBottom = self.view.frame.height - keyboardBounds.origin.y
             print("inputBottom: \(inputBottom)")
             print("keyboard: \(keyboardHeight)")
-            
-            
             var inset = self.collectionView.contentInset
             inset.bottom = inputBottom + 46
             self.collectionView.contentInset = inset
-            
-            
-            
             self.commentInputBottomConstraint.constant = inputBottom
             UIView.animate(withDuration: animationDuration, delay: 0, options: animationOptions, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            
-            
         }
     }
     
     func removeKeyboardNOtification() {
         NotificationCenter.default.removeObserver(self)
     }
-    
- 
 }
 
 extension IssueDetailViewController {
@@ -164,9 +152,7 @@ extension IssueDetailViewController {
                 case .success(let issue):
                     print("issue: \(issue)")
                     self?.issue = issue
-//                    self?.loadHeaderView()
                 case .failure(let error):
-                    print(dataResponse.request)
                     print(error)
                 }
                 
@@ -177,13 +163,10 @@ extension IssueDetailViewController {
                 case .success(let issue):
                     print("issue: \(issue)")
                     self?.issue = issue
-//                    self?.loadHeaderView()
                 case .failure(let error):
-                    print(dataResponse.request)
                     print(error)
                 }
             })
         }
     }
 }
-

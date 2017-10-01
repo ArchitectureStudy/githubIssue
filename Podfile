@@ -8,7 +8,7 @@ target 'GithubIssues' do
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
   pod 'OAuthSwift', '~> 1.1.2'
-
+  pod 'SwiftLint'
   target 'GithubIssuesTests' do
     inherit! :search_paths
     # Pods for testing

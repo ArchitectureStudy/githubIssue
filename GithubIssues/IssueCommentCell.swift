@@ -9,9 +9,7 @@
 import UIKit
 import AlamofireImage
 
-
 final class IssueCommentCell: UICollectionViewCell, CellProtocol {
-    
     
     @IBOutlet var bodyLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
@@ -44,8 +42,9 @@ extension IssueCommentCell {
     }
 
     static var cellFromNib: IssueCommentCell {
-        get {
-            return Bundle.main.loadNibNamed("IssueCommentCell", owner: nil, options: nil)?.first as! IssueCommentCell
+        guard let cell = Bundle.main.loadNibNamed("IssueCommentCell", owner: nil, options: nil)?.first as? IssueCommentCell else {
+            return IssueCommentCell()
         }
+        return cell
     }
 }

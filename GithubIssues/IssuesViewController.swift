@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-final class IssuesViewController: ListViewController<IssueCell>  {
+final class IssuesViewController: ListViewController<IssueCell> {
     var owner: String = ""
     var repo: String = ""
     
@@ -52,7 +52,6 @@ final class IssuesViewController: ListViewController<IssueCell>  {
         let data = datasource[indexPath.item]
         self.performSegue(withIdentifier: "PushIssueDetail", sender: data)
     }
-    
     
     override func cellIdentifier() -> String {
         return "IssueCell"

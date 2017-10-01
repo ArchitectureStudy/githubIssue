@@ -27,9 +27,7 @@ class RepoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -49,7 +47,6 @@ class RepoViewController: UIViewController {
             issuesViewController.repo = repo
         }
     }
-    
     
     @IBAction func unwindFromRepos(_ segue: UIStoryboardSegue) {
         if let reposViewController = segue.source as?  ReposViewController, let (owner, repo) = reposViewController.selectedRepo {

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum GithubRouter  {
+enum GithubRouter {
     case authKey(Parameters, HTTPHeaders)
     case repoIssues(owner: String, repo: String, parameters: Parameters)
     case issueDetail(owner: String, repo: String, number: Int, parameters: Parameters)
@@ -69,7 +69,7 @@ extension GithubRouter: URLRequestConvertible {
         
         switch self {
         case let .authKey(parameters, headers):
-            headers.forEach{ (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
+            headers.forEach { (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case let .repoIssues(_, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)

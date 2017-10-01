@@ -10,20 +10,16 @@ import UIKit
 import Alamofire
 
 class CreateIssueViewController: UIViewController {
-
     @IBOutlet var textView: UITextView!
     @IBOutlet var titleTextField: UITextField!
-    
     var createdIssue: Model.Issue?
     var owner: String = ""
     var repo: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
 }
-
 
 extension CreateIssueViewController {
     func setup() {
@@ -31,7 +27,6 @@ extension CreateIssueViewController {
         textView.layer.borderWidth = 1.0 / UIScreen.main.scale
         textView.layer.cornerRadius = 5
     }
-    
     func uploadIssue() {
         let title = titleTextField.text ?? ""
         let body = textView.text ?? ""
@@ -42,7 +37,7 @@ extension CreateIssueViewController {
                 print(issue)
                 self.createdIssue = issue
                 self.performSegue(withIdentifier: "UnwindToIssues", sender: self)
-            case .failure(_):
+            case .failure:
                 break
             }
         }
@@ -50,7 +45,7 @@ extension CreateIssueViewController {
 }
 
 extension CreateIssueViewController {
-    @IBAction func DoneButtonTapped(_ sender: Any) {
+    @IBAction func doneButtonTapped(_ sender: Any) {
         uploadIssue()
     }
 }

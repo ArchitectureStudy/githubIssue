@@ -1,4 +1,3 @@
-//
 //  BitbucketAPI.swift
 //  GithubIssues
 //
@@ -12,7 +11,6 @@ import SwiftyJSON
 import OAuthSwift
 
 struct BitbucketAPI: API {
-    
     let bitbucketOAuth: OAuth2Swift = OAuth2Swift(
         consumerKey:    "vx2MD5uVaRyLgMxype",
         consumerSecret: "CA9cZxqWEgRDpZCCYy353WG763J8McWH",
@@ -20,7 +18,6 @@ struct BitbucketAPI: API {
         accessTokenUrl: "https://bitbucket.org/site/oauth2/access_token",
         responseType:   "code"
     )
-    
     func getOauthKey(user: String, password: String, completionHandler: @escaping (DataResponse<JSON>) -> Void) {
         var headers: HTTPHeaders = [:]
         if let authorizationHeader = Request.authorizationHeader(user: user, password: password) {
@@ -33,55 +30,52 @@ struct BitbucketAPI: API {
                 completionHandler(json)
         }
     }
-    
     func getToekn(handler: @escaping (() -> Void)) {
         guard let url = URL(string:"ISSAPP://oauth-callback/bitbucket") else { return }
-        let _ = bitbucketOAuth.authorize(
+        bitbucketOAuth.authorize(
             withCallbackURL: url,
             scope: "issue:write", state:"state",
-            success: {(credential, response, parameters) in
+            success: {(credential, _, _) in
                 GlobalState.instance.token = credential.oauthToken
                 GlobalState.instance.refreshToken = credential.oauthRefreshToken
                 GlobalState.instance.serviceType = .bitbucket
                 App.api = BitbucketAPI()
                 handler()
-        }) { ( error ) in
+        }, failure: { ( error ) in
             print(error.localizedDescription)
-        }
+        })
     }
-    
     func tokenRefresh(handler: @escaping (() -> Void)) {
         guard let refreshToken = GlobalState.instance.refreshToken else { return }
-        
-        bitbucketOAuth.renewAccessToken(withRefreshToken: refreshToken, success: { (credential, response, parameters) in
+        bitbucketOAuth.renewAccessToken(
+            withRefreshToken: refreshToken,
+            success: { (credential, _, _) in
             GlobalState.instance.token = credential.oauthToken
             GlobalState.instance.refreshToken = credential.oauthRefreshToken
             GlobalState.instance.serviceType = .bitbucket
             App.api = BitbucketAPI()
             handler()
-        }) { (error) in
+        }, failure: { (error) in
             print(error.localizedDescription)
-        }
+        })
     }
-    
     func repoIssues(owner: String, repo: String) -> (Int, @escaping IssueResponsesHandler) -> Void {
         return { (page: Int, handler: @escaping IssueResponsesHandler) in
             let parameters: Parameters = ["page": page, "state": "all"]
             Alamofire.request(BitbucketRouter.repoIssues(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-                print("result: \(dataResponse.value)")
                 if dataResponse.response?.statusCode == 401 {
                     var retryCount = 1
                     self.tokenRefresh {
                         if retryCount > 1 {
                             return
                         }
-                        retryCount = retryCount + 1
+                        retryCount += 1
                         self.repoIssues(owner: owner, repo: repo)(page, handler)
                     }
                     return
                 }
                 let result = dataResponse.map({ (json: JSON) -> [Model.Issue] in
-                    return json["values"].arrayValue.map{ (json: JSON) -> Model.Issue in
+                    return json["values"].arrayValue.map { (json: JSON) -> Model.Issue in
                         Model.Issue(json: json.githubIssueToBitbucket)
                     }
                 })
@@ -89,14 +83,12 @@ struct BitbucketAPI: API {
             }
         }
     }
-    
     func issueComment(owner: String, repo: String, number: Int) -> (Int, @escaping CommentResponsesHandler) -> Void {
         return { page, handler in
             let parameters: Parameters = ["page": page]
             Alamofire.request(BitbucketRouter.issueDetail(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-                print("result: \(dataResponse.value)")
                 let result = dataResponse.map({ (json: JSON) -> [Model.Comment] in
-                    return json["values"].arrayValue.map{
+                    return json["values"].arrayValue.map {
                         Model.Comment(json: $0.githubCommentToBitbucket)
                     }
                 })
@@ -104,7 +96,6 @@ struct BitbucketAPI: API {
             }
         }
     }
-    
     func createComment(owner: String, repo: String, number: Int, comment: String, completionHandler: @escaping (DataResponse<Model.Comment>) -> Void ) {
         let parameters: Parameters = ["body": comment]
         Alamofire.request(BitbucketRouter.createComment(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
@@ -114,36 +105,29 @@ struct BitbucketAPI: API {
             completionHandler(result)
         }
     }
-    
     func createIssue(owner: String, repo: String, title: String, body: String, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void ) {
         let parameters: Parameters = ["title": title, "content": ["raw":body]]
         Alamofire.request(BitbucketRouter.createIssue(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            print(dataResponse.request?.url?.absoluteString)
             let result = dataResponse.map({ (json: JSON) -> Model.Issue in
                 Model.Issue(json: json.githubIssueToBitbucket)
             })
             completionHandler(result)
         }
     }
-    
     func closeIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
         var dict = issue.toDict
         dict["state"] = Model.Issue.State.closed.display
         Alamofire.request(BitbucketRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            print(dataResponse.request?.url?.absoluteString)
             let result = dataResponse.map({ (json: JSON) -> Model.Issue in
                 Model.Issue(json: json)
             })
             completionHandler(result)
         }
-        
     }
-    
     func openIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
         var dict = issue.toDict
         dict["state"] = Model.Issue.State.open.display
         Alamofire.request(BitbucketRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            print(dataResponse.request?.url?.absoluteString)
             let result = dataResponse.map({ (json: JSON) -> Model.Issue in
                 Model.Issue(json: json)
             })

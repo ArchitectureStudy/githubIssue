@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum BitbucketRouter  {
+enum BitbucketRouter {
     case authKey(Parameters, HTTPHeaders)
     case repoIssues(owner: String, repo: String, parameters: Parameters)
     case issueDetail(owner: String, repo: String, number: Int, parameters: Parameters)
@@ -23,7 +23,6 @@ extension BitbucketRouter: URLRequestConvertible {
     static let baseURLString: String = "https://api.bitbucket.org"
     static let clientID: String = "36c48adc3d1433fbd286"
     static let clientSecret: String = "a911bfd178a79f25d14c858a1199cd76d9e92f3b"
-    
     var method: HTTPMethod {
         switch self {
         case .authKey:
@@ -41,7 +40,6 @@ extension BitbucketRouter: URLRequestConvertible {
             return .patch
         }
     }
-    
     var path: String {
         switch self {
         case .authKey:
@@ -60,16 +58,14 @@ extension BitbucketRouter: URLRequestConvertible {
     }
     func asURLRequest() throws -> URLRequest {
         let url = try BitbucketRouter.baseURLString.asURL()
-        
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         if let token = GlobalState.instance.token, !token.isEmpty {
             urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        
         switch self {
         case let .authKey(parameters, headers):
-            headers.forEach{ (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
+            headers.forEach { (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case let .repoIssues(_, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
@@ -82,7 +78,6 @@ extension BitbucketRouter: URLRequestConvertible {
         case let .editIssue(_, _, _, parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
-        
         return urlRequest
     }
 }

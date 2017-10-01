@@ -26,9 +26,10 @@ extension IssueCell: CellProtocol {
     typealias Item = Model.Issue
     
     static var cellFromNib: IssueCell {
-        get {
-            return Bundle.main.loadNibNamed("IssueCell", owner: nil, options: nil)?.first as! IssueCell
+        guard let cell = Bundle.main.loadNibNamed("IssueCell", owner: nil, options: nil)?.first as? IssueCell else {
+            return IssueCell()
         }
+        return cell
     }
 
     func update(data issue: Model.Issue) {

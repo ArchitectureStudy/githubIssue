@@ -98,7 +98,7 @@
                             <constraint firstItem="kYw-MB-QBD" firstAttribute="top" secondItem="HLi-3O-WDm" secondAttribute="top" constant="8" id="w9o-vi-FtC"/>
                             <constraint firstAttribute="bottom" secondItem="kYw-MB-QBD" secondAttribute="bottom" constant="8" id="zcP-hp-WR8"/>
                         </constraints>
-                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="-8" bottom="8" trailing="8"/>
+                        <edgeInsets key="layoutMargins" top="8" left="-8" bottom="8" right="8"/>
                     </view>
                 </subviews>
             </view>
@@ -108,6 +108,7 @@
                 <constraint firstAttribute="trailing" secondItem="HLi-3O-WDm" secondAttribute="trailing" id="jTX-Hy-6hh"/>
                 <constraint firstItem="HLi-3O-WDm" firstAttribute="leadingMargin" secondItem="8Fl-Em-Ojd" secondAttribute="leading" id="yzK-NF-AuV"/>
             </constraints>
+            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
             <connections>
                 <outlet property="bodyLabel" destination="AdX-hJ-2rr" id="l8C-IJ-QfB"/>
                 <outlet property="commentContanerView" destination="kYw-MB-QBD" id="2Em-OI-JsM"/>

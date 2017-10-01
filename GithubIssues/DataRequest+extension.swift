@@ -26,11 +26,9 @@ extension DataRequest {
                 DataRequest.errorMessage(response, error: error, data: data)
                 return .failure(error!)
             }
-            
             let result = DataRequest
                 .jsonResponseSerializer(options: .allowFragments)
                 .serializeResponse(request, response, data, error)
-            
             switch result {
             case .success(let value):
                 if let _ = response {
@@ -48,7 +46,6 @@ extension DataRequest {
         }
         return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
-    
     static func errorMessage(_ response: HTTPURLResponse?, error: Error?, data: Data?) {
         debugPrint("status: \(response?.statusCode ?? -1), error message:\(error.debugDescription)")
     }

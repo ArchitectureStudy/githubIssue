@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 struct App {
-    static var api: API =  {
+    static var api: API = {
         switch GlobalState.instance.serviceType {
         case .github:
             return GithubAPI()

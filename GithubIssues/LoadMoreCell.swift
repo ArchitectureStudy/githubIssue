@@ -16,7 +16,8 @@ class LoadMoreCell: UICollectionReusableView {
     public func loadNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "LoadMoreCell", bundle: bundle)
-        return nib.instantiate(withOwner: self, options: nil)[0] as! UIView 
+        guard let view = nib.instantiate(withOwner: self, options: nil)[0] as? UIView else { return UIView() }
+        return view
     }
     
     override public init(frame: CGRect) {
@@ -32,20 +33,12 @@ class LoadMoreCell: UICollectionReusableView {
     
     fileprivate func setupNib() {
         let view = self.loadNib()
-        
         self.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         let bindings = ["view": view]
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:[], metrics:nil, views: bindings))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:[], metrics:nil, views: bindings))
-        
-//        activityIndicatorView.addObserver(self, forKeyPath: "hidden", options: [ .new], context: nil)
     }
-    
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        print("keypath: \(keyPath), \(change)")
-//    }
-    
 }
 
 extension LoadMoreCell {
@@ -59,12 +52,3 @@ extension LoadMoreCell {
         doneView.isHidden = true
     }
 }
-
-//extension LoadMoreCell {
-//    static var view: LoadMoreCell {
-//        get {
-//            return Bundle.main.loadNibNamed("LoadMoreCell", owner: nil, options: nil)?.first as! LoadMoreCell
-//        }
-//    }
-//}
-

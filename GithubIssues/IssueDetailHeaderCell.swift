@@ -56,7 +56,6 @@ class IssueDetailHeaderCell: UICollectionReusableView {
     static let estimateSizeCell: IssueDetailHeaderCell = IssueDetailHeaderCell()
 }
 
-
 // MARK: - setup
 extension IssueDetailHeaderCell {
     func setup() {
@@ -86,8 +85,6 @@ extension IssueDetailHeaderCell {
             withHorizontalFittingPriority: UILayoutPriorityRequired,
             verticalFittingPriority: UILayoutPriorityDefaultLow
         )
-        
-        
         let width = size.width == 0 ? IssueDetailHeaderCell.estimateSizeCell.bounds.width : size.width
         let height = size.height == 0 ? IssueDetailHeaderCell.estimateSizeCell.bounds.height : size.height
         let cellSize = CGSize(width: width, height: height)
@@ -112,4 +109,3 @@ extension IssueDetailHeaderCell {
     }
     
 }
-

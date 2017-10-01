@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
     
     static var viewController: LoginViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return LoginViewController() }
         return viewController
     }
     @IBAction func githubLoginButtonTapped(_ sender: Any) {
