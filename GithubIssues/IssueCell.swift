@@ -34,10 +34,12 @@ extension IssueCell: CellProtocol {
     func update(data issue: Model.Issue) {
         titleLabel.text = issue.title
         contentLabel.text = issue.body
-        let createdAt = issue.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
+        let createdAt = issue.createdAt?.string(dateFormat: "dd MMM yyyy") ?? "-"
         contentLabel.text = "#\(issue.number) \(issue.state.display) on \(createdAt) by \(issue.user.login)"
         commentCountButton.setTitle("\(issue.comments)", for: .normal)
         stateButton.isSelected = issue.state == .closed
+        let commentCountHidden: Bool = issue.comments == 0
+        commentCountButton.isHidden = commentCountHidden
     }
 }
 

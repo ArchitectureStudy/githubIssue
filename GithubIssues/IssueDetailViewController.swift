@@ -21,7 +21,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api = API.issueComment(owner: owner, repo: repo, number: issue.number)
+        api = App.api.issueComment(owner: owner, repo: repo, number: issue.number)
         setup()
         
     }
@@ -47,7 +47,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     @IBAction func sendButtonTapped(_ sender: Any) {
         let comment = commentTextField.text ?? ""
-        API.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
+        App.api.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
             guard let `self` = self else { return }
             switch dataResponse.result {
             case .success(let comment):
@@ -159,7 +159,7 @@ extension IssueDetailViewController {
     func chagneState() {
         switch issue.state {
         case .open, .none:
-            API.closeIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
+            App.api.closeIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
                 switch dataResponse.result {
                 case .success(let issue):
                     print("issue: \(issue)")
@@ -172,7 +172,7 @@ extension IssueDetailViewController {
                 
             })
         case .closed:
-            API.openIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
+            App.api.openIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
                 switch dataResponse.result {
                 case .success(let issue):
                     print("issue: \(issue)")

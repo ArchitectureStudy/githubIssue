@@ -38,7 +38,13 @@ class LoadMoreCell: UICollectionReusableView {
         let bindings = ["view": view]
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:[], metrics:nil, views: bindings))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:[], metrics:nil, views: bindings))
+        
+//        activityIndicatorView.addObserver(self, forKeyPath: "hidden", options: [ .new], context: nil)
     }
+    
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        print("keypath: \(keyPath), \(change)")
+//    }
     
 }
 
@@ -54,10 +60,11 @@ extension LoadMoreCell {
     }
 }
 
-extension LoadMoreCell {
-    static var view: LoadMoreCell {
-        get {
-            return Bundle.main.loadNibNamed("LoadMoreCell", owner: nil, options: nil)?.first as! LoadMoreCell
-        }
-    }
-}
+//extension LoadMoreCell {
+//    static var view: LoadMoreCell {
+//        get {
+//            return Bundle.main.loadNibNamed("LoadMoreCell", owner: nil, options: nil)?.first as! LoadMoreCell
+//        }
+//    }
+//}
+

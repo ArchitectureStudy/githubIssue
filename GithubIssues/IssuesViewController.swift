@@ -15,7 +15,7 @@ final class IssuesViewController: ListViewController<IssueCell>  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api = API.repoIssues(owner: owner, repo: repo)
+        api = App.api.repoIssues(owner: owner, repo: repo)
         collectionView.delegate = self
         collectionView.dataSource = self
         setup()
@@ -66,7 +66,6 @@ final class IssuesViewController: ListViewController<IssueCell>  {
             
         case UICollectionElementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadMoreCell", for: indexPath) as? LoadMoreCell ?? LoadMoreCell()
-            
             loadMoreCell = footerView
             return footerView
             

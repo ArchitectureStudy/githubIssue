@@ -77,7 +77,6 @@ class ListViewController<CellType:UICollectionViewCell & CellProtocol>: UIViewCo
         
     }
     
-    
     func dataLoaded(items: [Item]) {
         refreshDataSourceIfNeeded()
         

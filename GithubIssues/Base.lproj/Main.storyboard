@@ -6,7 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -322,7 +324,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noI-Te-GHp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vIo-Jh-NwP">
                                     <size key="itemSize" width="375" height="100"/>
@@ -469,81 +471,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggV-SU-juI">
-                                <rect key="frame" x="33" y="274" width="74" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEG-Bc-gEw">
-                                <rect key="frame" x="33" y="308" width="74" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="74" id="Ci4-jJ-l8d"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZU7-W8-eyz">
-                                <rect key="frame" x="115" y="303" width="235" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9YG-pT-ukW">
-                                <rect key="frame" x="115" y="269" width="235" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="235" id="qTO-xY-Ts7"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Octocat" translatesAutoresizingMaskIntoConstraints="NO" id="Af0-lU-FwV">
-                                <rect key="frame" x="87" y="58" width="200" height="166"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="oL1-IE-wZO"/>
-                                    <constraint firstAttribute="height" constant="166" id="oTz-EM-OqW"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aV-9m-Ryz">
-                                <rect key="frame" x="101" y="353" width="172" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="172" id="Hrk-Ao-4DE"/>
-                                </constraints>
-                                <state key="normal" title="Login With Github"/>
-                                <connections>
-                                    <action selector="loginButtonTapped:" destination="4ro-W2-nQz" eventType="touchUpInside" id="VhP-Vh-XUv"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yqu-UA-lz2">
+                                <rect key="frame" x="48" y="65" width="280" height="142.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xgc-YB-3pf">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="142.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Octocat" translatesAutoresizingMaskIntoConstraints="NO" id="Af0-lU-FwV">
+                                                <rect key="frame" x="3.5" y="0.0" width="113" height="112.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Af0-lU-FwV" secondAttribute="height" multiplier="1:1" id="8su-TR-eKq"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omK-yB-euf">
+                                                <rect key="frame" x="0.0" y="112.5" width="120" height="30"/>
+                                                <state key="normal" title="Login with Github"/>
+                                                <connections>
+                                                    <action selector="githubLoginButtonTapped:" destination="4ro-W2-nQz" eventType="touchUpInside" id="o15-z2-sxY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gyf-QD-bkl">
+                                        <rect key="frame" x="140" y="0.0" width="140" height="142.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitbucket" translatesAutoresizingMaskIntoConstraints="NO" id="6tl-3Q-ude">
+                                                <rect key="frame" x="14" y="0.0" width="112.5" height="112.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="6tl-3Q-ude" secondAttribute="height" multiplier="1:1" id="fPy-as-jJ3"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7q-y7-utn">
+                                                <rect key="frame" x="0.0" y="112.5" width="140" height="30"/>
+                                                <state key="normal" title="Login with Bitbucket"/>
+                                                <connections>
+                                                    <action selector="bitbucketLoginButtonTapped:" destination="4ro-W2-nQz" eventType="touchUpInside" id="i4V-vn-8n9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7aV-9m-Ryz" firstAttribute="centerX" secondItem="too-Tl-hcc" secondAttribute="centerX" id="6h6-rY-de8"/>
-                            <constraint firstItem="Af0-lU-FwV" firstAttribute="centerX" secondItem="too-Tl-hcc" secondAttribute="centerX" id="84S-bb-W1e"/>
-                            <constraint firstItem="ggV-SU-juI" firstAttribute="centerY" secondItem="9YG-pT-ukW" secondAttribute="centerY" id="8MF-kt-XuQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9YG-pT-ukW" secondAttribute="trailing" constant="9" id="HS0-CK-Kgb"/>
-                            <constraint firstItem="9YG-pT-ukW" firstAttribute="leading" secondItem="ggV-SU-juI" secondAttribute="trailing" constant="8" id="ISC-LO-Pac"/>
-                            <constraint firstItem="ZU7-W8-eyz" firstAttribute="leading" secondItem="sEG-Bc-gEw" secondAttribute="trailing" constant="8" id="V10-dj-wrr"/>
-                            <constraint firstItem="Af0-lU-FwV" firstAttribute="top" secondItem="Lh6-lc-CM7" secondAttribute="bottom" constant="38" id="VaX-lu-Q5e"/>
-                            <constraint firstItem="sEG-Bc-gEw" firstAttribute="leading" secondItem="too-Tl-hcc" secondAttribute="leadingMargin" constant="17" id="a4b-l7-Ph4"/>
-                            <constraint firstItem="ggV-SU-juI" firstAttribute="leading" secondItem="too-Tl-hcc" secondAttribute="leadingMargin" constant="17" id="eFu-Oe-KKf"/>
-                            <constraint firstItem="ggV-SU-juI" firstAttribute="width" secondItem="sEG-Bc-gEw" secondAttribute="width" id="gxZ-gr-QjH"/>
-                            <constraint firstItem="7aV-9m-Ryz" firstAttribute="top" secondItem="ZU7-W8-eyz" secondAttribute="bottom" constant="20" id="j6q-6A-59u"/>
-                            <constraint firstItem="ZU7-W8-eyz" firstAttribute="top" secondItem="9YG-pT-ukW" secondAttribute="bottom" constant="4" id="mhe-Wz-1Bz"/>
-                            <constraint firstItem="sEG-Bc-gEw" firstAttribute="centerY" secondItem="ZU7-W8-eyz" secondAttribute="centerY" id="xN4-No-FWo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZU7-W8-eyz" secondAttribute="trailing" constant="9" id="xkW-VF-T54"/>
-                            <constraint firstItem="9YG-pT-ukW" firstAttribute="top" secondItem="Af0-lU-FwV" secondAttribute="bottom" constant="45" id="zan-l7-8QZ"/>
+                            <constraint firstItem="yqu-UA-lz2" firstAttribute="top" secondItem="Lh6-lc-CM7" secondAttribute="bottom" constant="45" id="7bz-NC-nK0"/>
+                            <constraint firstItem="Af0-lU-FwV" firstAttribute="width" secondItem="too-Tl-hcc" secondAttribute="width" multiplier="0.3" id="SNh-Ch-7O5"/>
+                            <constraint firstItem="yqu-UA-lz2" firstAttribute="centerX" secondItem="too-Tl-hcc" secondAttribute="centerX" id="aCU-qd-hZH"/>
+                            <constraint firstItem="6tl-3Q-ude" firstAttribute="width" secondItem="too-Tl-hcc" secondAttribute="width" multiplier="0.3" id="ayO-gU-nzd"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="idTextField" destination="9YG-pT-ukW" id="E8u-FT-s1r"/>
-                        <outlet property="passwordTextField" destination="ZU7-W8-eyz" id="oJ1-dP-MGs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucB-YS-M6S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-412" y="836"/>
+            <point key="canvasLocation" x="-412" y="834.33283358320841"/>
         </scene>
         <!--Example View Controller-->
         <scene sceneID="EZs-6N-LNQ">
@@ -598,5 +579,6 @@
     </scenes>
     <resources>
         <image name="Octocat" width="800" height="665"/>
+        <image name="bitbucket" width="512" height="512"/>
     </resources>
 </document>

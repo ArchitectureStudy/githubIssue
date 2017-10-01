@@ -38,7 +38,7 @@ extension IssueCommentCell {
             profileImageView.af_setImage(withURL: url)
         }
         
-        let createdAt = comment.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
+        let createdAt = comment.createdAt?.string(dateFormat: "dd MMM yyyy") ?? "-"
         titleLabel.text = "\(comment.user.login) commented on \(createdAt)"
         bodyLabel.text = comment.body
     }

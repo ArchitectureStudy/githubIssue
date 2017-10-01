@@ -10,6 +10,9 @@
 		C9911DA0C2D7555BCE11A163 /* Pods_GithubIssues.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C82EDEECF19666BE564C8 /* Pods_GithubIssues.framework */; };
 		D7014DC61F6814A000F0F7F7 /* IssueDetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderCell.swift */; };
 		D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */; };
+		D71E7FD11F7FADF800FD5DA0 /* BitbucketRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E7FD01F7FADF800FD5DA0 /* BitbucketRouter.swift */; };
+		D71E7FD31F7FAE4C00FD5DA0 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E7FD21F7FAE4C00FD5DA0 /* GithubAPI.swift */; };
+		D71E7FD51F7FAE6100FD5DA0 /* BitbucketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E7FD41F7FAE6100FD5DA0 /* BitbucketAPI.swift */; };
 		D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D730D9951F6AE4DA0057276B /* ExampleViewController.swift */; };
 		D7412BD31F701F4A00E63DF6 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7412BD21F701F4A00E63DF6 /* IssueCell.xib */; };
 		D776DCC51F76286300E61284 /* LoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D776DCC41F76286300E61284 /* LoadMoreCell.xib */; };
@@ -22,7 +25,7 @@
 		D7CE58E81F64118400380CEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7CE58E61F64118400380CEE /* LaunchScreen.storyboard */; };
 		D7CE58F31F64118400380CEE /* GithubIssuesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE58F21F64118400380CEE /* GithubIssuesTests.swift */; };
 		D7CE58FE1F64118400380CEE /* GithubIssuesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE58FD1F64118400380CEE /* GithubIssuesUITests.swift */; };
-		D7CE590C1F64127C00380CEE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE590B1F64127C00380CEE /* Router.swift */; };
+		D7CE590C1F64127C00380CEE /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE590B1F64127C00380CEE /* GithubRouter.swift */; };
 		D7CE59101F64CB6F00380CEE /* DataRequest+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE590F1F64CB6F00380CEE /* DataRequest+extension.swift */; };
 		D7CE59131F64CBD800380CEE /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59121F64CBD800380CEE /* API.swift */; };
 		D7CE59151F64CC0B00380CEE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE59141F64CC0B00380CEE /* Model.swift */; };
@@ -73,6 +76,9 @@
 		C987F46EEBF6AB7C71701BE6 /* Pods_GithubIssuesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubIssuesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7014DC51F6814A000F0F7F7 /* IssueDetailHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderCell.swift; sourceTree = "<group>"; };
 		D7014DC71F6814ED00F0F7F7 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		D71E7FD01F7FADF800FD5DA0 /* BitbucketRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitbucketRouter.swift; sourceTree = "<group>"; };
+		D71E7FD21F7FAE4C00FD5DA0 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
+		D71E7FD41F7FAE6100FD5DA0 /* BitbucketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitbucketAPI.swift; sourceTree = "<group>"; };
 		D730D9951F6AE4DA0057276B /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		D7412BD21F701F4A00E63DF6 /* IssueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		D776DCC41F76286300E61284 /* LoadMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMoreCell.xib; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		D7CE58F91F64118400380CEE /* GithubIssuesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubIssuesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CE58FD1F64118400380CEE /* GithubIssuesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubIssuesUITests.swift; sourceTree = "<group>"; };
 		D7CE58FF1F64118400380CEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7CE590B1F64127C00380CEE /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		D7CE590B1F64127C00380CEE /* GithubRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		D7CE590F1F64CB6F00380CEE /* DataRequest+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+extension.swift"; sourceTree = "<group>"; };
 		D7CE59121F64CBD800380CEE /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		D7CE59141F64CC0B00380CEE /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -241,8 +247,11 @@
 		D7CE59111F64CBCB00380CEE /* API */ = {
 			isa = PBXGroup;
 			children = (
-				D7CE590B1F64127C00380CEE /* Router.swift */,
 				D7CE59121F64CBD800380CEE /* API.swift */,
+				D71E7FD21F7FAE4C00FD5DA0 /* GithubAPI.swift */,
+				D7CE590B1F64127C00380CEE /* GithubRouter.swift */,
+				D71E7FD41F7FAE6100FD5DA0 /* BitbucketAPI.swift */,
+				D71E7FD01F7FADF800FD5DA0 /* BitbucketRouter.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -265,7 +274,6 @@
 				D7CE591C1F64D82E00380CEE /* IssuesViewController.swift */,
 				D7CE591E1F64D99300380CEE /* LoginViewController.swift */,
 				D7CE59231F65005D00380CEE /* RepoViewController.swift */,
-				D7CE59251F65077B00380CEE /* IssueCell.swift */,
 				D7CE59291F6546D200380CEE /* IssueDetailViewController.swift */,
 				D7CE592B1F655AF600380CEE /* IssueCommentCell.swift */,
 				D7CE592F1F658CA900380CEE /* IssueCommentCell.xib */,
@@ -273,6 +281,7 @@
 				D776DD031F77E3D900E61284 /* IssueDetailHeaderCell.xib */,
 				D7ED99D31F6D71ED00E4B903 /* CreateIssueViewController.swift */,
 				D7ED99D51F6E100F00E4B903 /* ReposViewController.swift */,
+				D7CE59251F65077B00380CEE /* IssueCell.swift */,
 				D7412BD21F701F4A00E63DF6 /* IssueCell.xib */,
 				D7CB7A361F74A41900816E33 /* LoadMoreCell.swift */,
 				D776DCC41F76286300E61284 /* LoadMoreCell.xib */,
@@ -462,13 +471,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GithubIssues-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9B358046D0AF5ED9679EE94B /* [CP] Embed Pods Frameworks */ = {
@@ -477,9 +489,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GithubIssues/Pods-GithubIssues-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -492,13 +513,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GithubIssuesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BB4AD020B55BABD834A7F956 /* [CP] Copy Pods Resources */ = {
@@ -537,13 +561,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GithubIssuesUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FDD3DCF6031B043F0E918500 /* [CP] Copy Pods Resources */ = {
@@ -574,20 +601,23 @@
 				D7CE59181F64CC6B00380CEE /* Issue.swift in Sources */,
 				D7CE59281F65209A00380CEE /* LayoutAttributable.swift in Sources */,
 				D7ED99D61F6E100F00E4B903 /* ReposViewController.swift in Sources */,
+				D71E7FD51F7FAE6100FD5DA0 /* BitbucketAPI.swift in Sources */,
 				D7014DC81F6814ED00F0F7F7 /* UIColor+extension.swift in Sources */,
 				D7CE59101F64CB6F00380CEE /* DataRequest+extension.swift in Sources */,
 				D730D9961F6AE4DA0057276B /* ExampleViewController.swift in Sources */,
 				D7CB7A351F74A3C700816E33 /* ListViewController.swift in Sources */,
 				D7CE592A1F6546D200380CEE /* IssueDetailViewController.swift in Sources */,
 				D7CE591D1F64D82E00380CEE /* IssuesViewController.swift in Sources */,
-				D7CE590C1F64127C00380CEE /* Router.swift in Sources */,
+				D7CE590C1F64127C00380CEE /* GithubRouter.swift in Sources */,
 				D7CE591A1F64CFD500380CEE /* User.swift in Sources */,
+				D71E7FD11F7FADF800FD5DA0 /* BitbucketRouter.swift in Sources */,
 				D7CE59211F64DBB800380CEE /* GlobalState.swift in Sources */,
 				D7CE59241F65005D00380CEE /* RepoViewController.swift in Sources */,
 				D7CE58DE1F64118400380CEE /* AppDelegate.swift in Sources */,
 				D7CE59261F65077B00380CEE /* IssueCell.swift in Sources */,
 				D7CE592C1F655AF600380CEE /* IssueCommentCell.swift in Sources */,
 				D7CB7A371F74A41900816E33 /* LoadMoreCell.swift in Sources */,
+				D71E7FD31F7FAE4C00FD5DA0 /* GithubAPI.swift in Sources */,
 				D7CE591F1F64D99300380CEE /* LoginViewController.swift in Sources */,
 				D7ED99D41F6D71ED00E4B903 /* CreateIssueViewController.swift in Sources */,
 				D7CE59131F64CBD800380CEE /* API.swift in Sources */,

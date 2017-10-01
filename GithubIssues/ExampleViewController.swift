@@ -7,22 +7,22 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+//import RxSwift
+//import RxCocoa
 
 class ExampleViewController: UIViewController {
 
     @IBOutlet var textField: UITextField!
     @IBOutlet var label: UILabel!
-    var disposeBag: DisposeBag = DisposeBag()
+//    var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.rx.text.bind(to: label.rx.text).disposed(by: disposeBag)
+//        textField.rx.text.bind(to: label.rx.text).disposed(by: disposeBag)
+//
+//        Observable.just(3)
+//
         
-        Observable.just(3)
-        
-            
     }
     
 }

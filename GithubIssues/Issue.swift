@@ -45,16 +45,18 @@ extension Model.Issue {
     var toDict: [String: Any] {
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        
-        
-        var dict = ["id": id,
-         "number": number,
-         "title": title,
-         "comments": comments,
-         "body": body,
-         "state": state.display,
-         "user": ["id": user.id, "login": user.login, "acatar_url": (user.avatarURL?.absoluteString ?? "")]
-         ] as [String : Any]
+        var dict: [String : Any] = [
+            "id": id,
+            "number": number,
+            "title": title,
+            "comments": comments,
+            "body": body,
+            "state": state.display,
+            "user": [
+                "id": user.id,
+                "login": user.login,
+                "acatar_url": (user.avatarURL?.absoluteString ?? "")]
+        ]
         if let createdAt = createdAt {
             dict["createdAt"] = format.string(from: createdAt)
         }
@@ -73,15 +75,15 @@ extension Model.Issue {
 
 extension Model.Issue {
     enum State: String {
-        case open = "open"
-        case closed = "closed"
-        case none = "none"
+        case open
+        case closed
+        case none
         
         var display: String {
             switch self {
             case .open: return "opened"
             case .closed: return "closed"
-            default: return "-"
+            case .none: return "-"
             }
         }
         

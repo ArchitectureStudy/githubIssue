@@ -98,7 +98,7 @@ extension IssueDetailHeaderCell {
 extension IssueDetailHeaderCell {
     func update(data: Model.Issue, withImage: Bool = true) {
         
-        let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
+        let createdAt = data.createdAt?.string(dateFormat: "dd MMM yyyy") ?? "-"
         titleLabel.text = data.title
         stateButton.isSelected = data.state == .closed
         infoLabel.text = "\(data.user.login) \(data.state.display) this issue on \(createdAt) · \(data.comments) comments"

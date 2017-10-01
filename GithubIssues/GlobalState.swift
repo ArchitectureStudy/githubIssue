@@ -11,12 +11,18 @@ import Foundation
 final class GlobalState {
     static let instance = GlobalState()
     
+    enum ServiceType: String {
+        case github
+        case bitbucket
+    }
     
     struct constants {
         static let tokenKey         = "token"
         static let ownerKey         = "owner"
         static let repoKey          = "repo"
         static let reposKey         = "repos"
+        static let serviceType      = "serviceType"
+        static let refreshTokenKey   = "refreshToken"
     }
     
     var token: String? {
@@ -26,6 +32,16 @@ final class GlobalState {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: constants.tokenKey)
+        }
+    }
+    
+    var refreshToken: String? {
+        get {
+            let token = UserDefaults.standard.string(forKey: constants.refreshTokenKey)
+            return token
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: constants.refreshTokenKey)
         }
     }
     
@@ -48,6 +64,18 @@ final class GlobalState {
         
         set {
             UserDefaults.standard.set(newValue, forKey: constants.repoKey)
+        }
+    }
+    
+    var serviceType: ServiceType {
+        get {
+            let type = UserDefaults.standard.string(forKey: constants.serviceType) ?? ""
+            let serviceType = ServiceType(rawValue: type) ?? ServiceType.github
+            return serviceType
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: constants.serviceType)
         }
     }
     

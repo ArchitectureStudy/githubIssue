@@ -11,12 +11,12 @@ import SwiftyJSON
 
 extension Model {
     public struct User {
-        let id: Int
+        let id: String
         let login: String
         let avatarURL: URL?
         
         public init(json: JSON) {
-            id = json["id"].intValue
+            id = json["id"].stringValue
             login = json["login"].stringValue
             
             avatarURL = URL(string: json["avatar_url"].stringValue)

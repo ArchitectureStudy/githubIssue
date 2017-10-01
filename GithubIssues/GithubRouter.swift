@@ -10,23 +10,19 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum Router {
+enum GithubRouter  {
     case authKey(Parameters, HTTPHeaders)
     case repoIssues(owner: String, repo: String, parameters: Parameters)
     case issueDetail(owner: String, repo: String, number: Int, parameters: Parameters)
     case createComment(owner: String, repo: String, number: Int, parameters: Parameters)
     case createIssue(owner: String, repo: String, parameters: Parameters)
     case editIssue(owner: String, repo: String, number: Int, parameters: Parameters)
-    
-//    PATCH /repos/:owner/:repo/issues/:number
-    
 }
 
-extension Router: URLRequestConvertible {
-    
-    static let baseURLString = "https://api.github.com"
-    static let clientID = "36c48adc3d1433fbd286"
-    static let clientSecret = "a911bfd178a79f25d14c858a1199cd76d9e92f3b"
+extension GithubRouter: URLRequestConvertible {
+    static let baseURLString: String = "https://api.github.com"
+    static let clientID: String = "36c48adc3d1433fbd286"
+    static let clientSecret: String = "a911bfd178a79f25d14c858a1199cd76d9e92f3b"
     
     var method: HTTPMethod {
         switch self {
@@ -49,7 +45,7 @@ extension Router: URLRequestConvertible {
     var path: String {
         switch self {
         case .authKey:
-            return "/authorizations/clients/\(Router.clientID)/\(Date().timeIntervalSince1970)"
+            return "/authorizations/clients/\(GithubRouter.clientID)/\(Date().timeIntervalSince1970)"
         case let .repoIssues(owner, repo, _):
             return "/repos/\(owner)/\(repo)/issues"
         case let .issueDetail(owner, repo, number, _):
@@ -62,16 +58,15 @@ extension Router: URLRequestConvertible {
             return "/repos/\(owner)/\(repo)/issues/\(number)"
         }
     }
-    
     func asURLRequest() throws -> URLRequest {
-        let url = try Router.baseURLString.asURL()
+        let url = try GithubRouter.baseURLString.asURL()
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         if let token = GlobalState.instance.token, !token.isEmpty {
             urlRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
         }
-
+        
         switch self {
         case let .authKey(parameters, headers):
             headers.forEach{ (key, value) in urlRequest.addValue(value, forHTTPHeaderField: key) }
@@ -91,6 +86,3 @@ extension Router: URLRequestConvertible {
         return urlRequest
     }
 }
-
-
-

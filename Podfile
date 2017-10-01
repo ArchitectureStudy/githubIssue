@@ -7,8 +7,7 @@ target 'GithubIssues' do
   pod 'Alamofire', '~> 4.5'
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'OAuthSwift', '~> 1.1.2'
 
   target 'GithubIssuesTests' do
     inherit! :search_paths

@@ -22,9 +22,6 @@ class CreateIssueViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
-
-    
-    
 }
 
 
@@ -38,7 +35,7 @@ extension CreateIssueViewController {
     func uploadIssue() {
         let title = titleTextField.text ?? ""
         let body = textView.text ?? ""
-        API.createIssue(owner: owner, repo: repo, title: title, body: body) { [weak self] (dataResponse: DataResponse<Model.Issue>) in
+        App.api.createIssue(owner: owner, repo: repo, title: title, body: body) { [weak self] (dataResponse: DataResponse<Model.Issue>) in
             guard let `self` = self else { return }
             switch dataResponse.result {
             case .success(let issue):
@@ -51,7 +48,6 @@ extension CreateIssueViewController {
         }
     }
 }
-
 
 extension CreateIssueViewController {
     @IBAction func DoneButtonTapped(_ sender: Any) {
